@@ -7,9 +7,11 @@
 /* ------------------------------------------------------------------------------------------------------*/
 
 
+/* Provide your username here. E.g. lasradm account (LASR Administrator) */
+%let username=;
 
-%let username=; /* Provide your username here. Mostly lasradm account (LASR Administrator) */
-%let pwd=; /* Provide your password here. Its a good practice to encode it using proc pwencode */
+/* Provide your password here. Its a good practice to encode it using proc pwencode */
+%let pwd=;
 %let operation= %sysget(operation);
 %let protocol=;
 %let host=;
@@ -19,6 +21,7 @@
 %let tgturl=;
 %let status=;
 
+/* Get URL details from Metadata */
 data _null_;
 	length uri $256 upasnuri $256 ComType $256 srccnnuri $256 ConName $256 
 		protocol $6 HostName $256 port $4 service $100;
@@ -60,6 +63,7 @@ data _null_;
 	end;
 run;
 
+/* Get TGT and ST */
 %let rooturl=&protocol.://&host.:&port.;
 filename resp TEMP;
 filename headers TEMP;
@@ -75,7 +79,6 @@ run;
 data _null_;
 	infile headers termstr=CRLF length=reclen scanover truncover;
 	input @'Location:' tgt $varying500. reclen;
-	*call symput('tgturl', trim(tgt));
 	search='cas';
 	x=index(tgt, search);
 	caslen=x+2;
@@ -143,6 +146,7 @@ proc sql;
 	create table basetable (Message char(100));
 	run;
 
+	/* Update status */
 	%macro status(id, name);
 	proc http method="GET" url="&rooturl.&service./sasui/lasr/servers/&id./status" 
 			headerout=headers out=resp HEADEROUT_OVERWRITE;
@@ -160,6 +164,7 @@ proc sql;
 	libname statout clear;
 %mend status;
 
+/* Perform action on LASR Servers */
 %macro lasr(operation);
 	%if &operation=start %then
 		%do;
