@@ -4,14 +4,30 @@
 /* 2 - Use the URL and perform different actions via API calls on LASR Servers                              */
 /* --------------------------------------------------------------------------------------------------------*/
 /* Version: 1.0 | Author: Anand Vyas                                                                      */
-/* ------------------------------------------------------------------------------------------------------*/
+/* Modifications for easy SAS-lsm configuration by Andy Foreman                                          */
+/* -----------------------------------------------------------------------------------------------------*/
 
+/***************************** USER DEFINED VARIABLES ******************************/
+/* Set these values before running the program or it will not work! */
+/* Use PROC PWENCODE on passwords and define the encoded {SAS002} value for security. Plaintext is accepted, but is insecure! */
 
-/* Provide your username here. E.g. lasradm account (LASR Administrator) */
-%let username=;
+/* Define Metadata Server Connection. Provided metauser must be able to read metadata repository. */
+options metaserver="meta.demo.sas.com"
+metaport=8561
+metauser="metademouser"
+metapass="{SAS002}1A6872358C580064DDCD225ACC1";
 
-/* Provide your password here. Its a good practice to encode it using proc pwencode */
+/* LASR Administrator account username. E.g. lasradm account (or another user who can start/stop LASR servers) */
+%let username=lasrdemouser;
+
+/* LASR Administrator account password. */
 %let pwd=;
+
+/**************************** END USER DEFINED VARIABLES *****************************/
+
+/* DO NOT EDIT PROGRAM BELOW THIS LINE */
+
+/* Initialize some empty variables to fill in later */
 %let operation= %sysget(operation);
 %let protocol=;
 %let host=;
