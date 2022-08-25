@@ -30,13 +30,16 @@ B) Edit the lasr_ops.sas program. The top of the program contains a section for 
 * metaport - SAS Metadata Server port (default: 8561)
 * metauser - SAS Metadata Server login user. This can be any user defined in SAS Metadata who has permissions to read Metadata.
 * metapass - Password for the defined SAS Metadata Server login user. Storing the password in {SAS002} format is recommended.
-* username- LASR Administrator login user. Usually lasradm, but this can be any user who has permissions to start and stop LASR Servers.
+* username - LASR Administrator login user. Usually lasradm, but this can be any user who has permissions to start and stop LASR Servers.
 * pwd - Password for the defined LASR Administrator login user. Storing the password in {SAS002} format is recommended.
 
 *For more details on these user-defined variables, refer to the comments inside the code near where they are set.*
 
+4) Set LASROps.sh to be executable using `chmod`.
+
 ### Additional Considerations
 
 This utility assumes the executing user has a home directory, which is used to store a few .txt files that track LASR status. If the user does not have a home directory, these paths will need to be updated to a different location that is readable and writable:
+* LASROps.sh - End of line calling SAS to execute program, near bottom of file
 * LASROps.sh - `cat` command, near bottom of file
 * lasr_ops.sas - PROC EXPORT code's OUTFILE option, near bottom of file
