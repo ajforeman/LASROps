@@ -15,7 +15,7 @@ https://communities.sas.com/t5/SAS-Communities-Library/Start-LASR-Servers-via-AP
 
 ## Required setup configuration:
 
-1) Download the LASROps.sh script and lasr_ops.sas program to a machine where SAS can be run.
+1) Download the **LASROps.sh** script and **lasr_ops.sas** program to a machine where SAS can be run.
 2) Store the downloaded files in an accessible location. Recommended to create a subdirectory under SASConfig/Utilities/, such as SASConfig/Utilities/LASROps/ .
 3) Set required user-defined variables inside the downloaded files:
 
