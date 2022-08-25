@@ -8,9 +8,9 @@
 # ***************************** USER DEFINED VARIABLES ******************************
 #
 #Path to a SAS binary .sh (default: SAS Batch Server, <SASConfig>/Lev1/<SASApp>/BatchServer/sasbatch.sh )
-$saslocation = "/opt/sas/config/Lev1/SASAppVA/BatchServer/sasbatch.sh"
+saslocation="/opt/sas/config/Lev1/SASAppVA/BatchServer/sasbatch.sh"
 #Path to the lasr_ops.sas program (recommended: <SASConfig>/Utilities/LASROps/lasr_ops.sas )
-$progpath = "/opt/sas/config/Utilities/LASROps/lasr_ops.sas"
+progpath="/opt/sas/config/Utilities/LASROps/lasr_ops.sas"
 #
 # *************************** END USER DEFINED VARIABLES ****************************
 
